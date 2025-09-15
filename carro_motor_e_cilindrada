@@ -1,0 +1,81 @@
+import java.util.Scanner
+
+// classe motor
+public class Motor {
+    private float cilindrada;
+
+    public Motor(float cilindrada) {
+        this.cilindrada = cilindrada;
+    }
+
+    public float getCilindrada() {
+        return cilindrada;
+    }
+
+    public void setCilindrada(float cilindrada) {
+        this.cilindrada = cilindrada;
+    }
+}
+
+// Classe Carro
+public class Carro {
+    private String modelo;
+    private Motor motor;
+
+    public Carro(String modelo, Motor motor) {
+        this.modelo = modelo;
+        this.motor = motor;
+    }
+
+    public float velocidadeMaxima() {
+        float c = motor.getCilindrada();
+        if (c <= 1.0f) {
+            return 140.0f;
+        } else if (c <= 1.6f) {
+            return 180.0f;
+        } else if (c <= 2.0f) {
+            return 220.0f;
+        } else {
+            return 260.0f;
+        }
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
+}
+
+// Classe Principal (main)
+public class Main {
+    public static void main(String[] args) {
+        // Motores
+        Motor motor1 = new Motor(1.0f);
+        Motor motor2 = new Motor(1.6f);
+        Motor motor3 = new Motor(2.0f);
+        Motor motor4 = new Motor(2.2f);
+
+        // Carros com motores diferentes
+        Carro carroA = new Carro("Modelo A", motor1);
+        Carro carroB = new Carro("Modelo B", motor2);
+        Carro carroC = new Carro("Modelo C", motor3);
+        Carro carroD = new Carro("Modelo D", motor4);
+
+        // Carros com o mesmo motor
+        Motor motorCompartilhado = new Motor(1.6f);
+        Carro carroE = new Carro("Modelo E", motorCompartilhado);
+        Carro carroF = new Carro("Modelo F", motorCompartilhado);
+
+        // Impressão
+        Carro[] carros = { carroA, carroB, carroC, carroD, carroE, carroF };
+
+        for (Carro carro : carros) {
+            System.out.println(carro.getModelo() +
+                    " - Cilindrada: " + carro.getMotor().getCilindrada() +
+                    "L - Velocidade Máxima: " + carro.velocidadeMaxima() + " km/h");
+        }
+    }
+}
